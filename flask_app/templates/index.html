@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display:flex;
+            justify-content:space-evenly;
+        }
+        
+
+        form{
+            background-color:aqua;
+            width:400px;
+            padding: 20px;
+            display:flex;
+            flex-direction: column;
+        }
+
+        .alert{
+            background-color: red;
+            width: auto;
+            border: 2px solid black;
+            margin-left: 15px;
+        }
+
+        label, input{
+            margin: 5px
+        }
+    </style>
+</head>
+<body class="container">
+    <div>
+        <form action="/register" method="post">
+            <h1>Register</h1>
+            <div class = "alert">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <h2>Invalid Entry!</h2>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <label>First Name:</label>
+            <input type = "text" name="first_name">
+            <label>Last Name:</label>
+            <input type = "text" name="last_name">
+            <label>Email:</label>
+            <input type = "text" name="email">
+            <label>Password:</label>
+            <input type = "password" name="password">
+            <label>Confirm Password:</label>
+            <input type="password" name="confirm_password">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div>
+        <form action = '/login' method="post">
+            <h1>Login</h1>
+            <div class = "alert">
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                    <h2>Invalid Entry!</h2>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <label>Email:</label>
+            <input type = "text" name="email">
+            <label>Password:</label>
+            <input type = "text" name="password">
+            <input type = "submit" value= "Login" >
+        </form>
+    </div>
+</body>
+</html>
